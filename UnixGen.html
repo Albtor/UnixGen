@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unix Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap');
+        body{
+            background-color: rgb(61, 90, 104);
+            font-family: 'Zen Loop', cursive;
+            font-size: 18px;
+            color: white;
+        }
+
+        button {
+            width: 130px;
+            height: 40px;
+            margin: 4px 8px;
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <h1> Generator</h1>
+    <div>
+    <button onclick="getOrderNumber()">Get Order Number</button> <span class="orderNum"></span>
+    </div>
+    <div>
+    <button onclick="GenerateHourV2()">v2 Get Unix Hours 18-20</button><span class="unixHour"></span>
+    </div>  
+    <div>
+    <button onclick="GenerateHourV3()">v3 Get Unix Hours 18-20</button><span class="unixHour"></span>
+    </div>  
+
+
+
+
+    <script>
+        const today = new Date(Date.now());
+        function GenerateHourV2(){
+        
+        let HourRequested1 = timeConverter(today, 16);
+        let HourRequested2 = timeConverter(today, 20);
+
+        document.querySelector(".unixHour").innerHTML = HourRequested1 +","+ HourRequested2;
+        // alert(today);
+        // alert(HourRequested1 +","+ HourRequested2);
+    
+
+        function timeConverter(date, hour){
+        var year = today.getFullYear();
+        var month = today.getMonth();
+        var date = today.getDate();
+
+        var time = new Date(year,month,date,hour);
+        time = toUnix(time);
+        return time;
+        }
+
+        function toUnix(date){
+            let UnixValue = Math.round(new Date(date).getTime() / 1000);
+            return UnixValue;
+        }
+    }
+
+    function getOrderNumber(){
+        let today = new Date(Date.now());
+        var year = today.getFullYear();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var date = today.getDate();
+        let orderNumber = "AL"+year+""+month+""+date+"00X";
+        // alert(month);
+        document.querySelector(".orderNum").innerHTML = orderNumber;
+    }
+    </script>
+</body>
+</html>
